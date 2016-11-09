@@ -36,33 +36,32 @@ $(document).ready(function(){
     		"&api_key=dc6zaTOxFJmzC&limit=10";
 
     	// get info from the link above
-    	$.ajax({
-    		url: queryURL, 
-    		method: 'GET'
-    	})
-    	//response to return value of topic added
-    	.done(function(response) {
+    	$.ajax({ url: queryURL, method: 'GET'}).done(function(response) {
+
     		var results = response.data;
 
-    		for (var i =0; i < results.length; i++){
-    			var gifs = $('<div class="item">')
-    			var rating = results[i].rating;
-    			var topic = $('<p>').text("Rating:" + rating);
-    			var gifImg = $('<img>');
-    			gifImg.attr('src', results[i].images.original_still);
+    		for (var i = 0; i <results.length; i++) {	
+	    		var gifs = $('<div class"item">')
+	    		var rating = results[i].rating;
+	    		var topic = $('<p>').text("Rating:" + rating);	
+	    		var gifImg = $('<img>');
+	    		gifImg.attr('src', results[i].images.fixed_height.url);
 
-    			gifs.append(topic)
-    			gifs.append(gifImg)
+	    		gifs.append(topic)
+	    		gifs.append(gifImg)
 
-    			$('#gifDiv').prepend(gifs);
-    		}	
-    	});		
+	    		$('#gifDiv').prepend(gifs);
+    					
 
-	}
+			};
+		
+		});	
+	}	
 //calling the fn outside of it 
 GifBtn();
 
 //closing tag
+
 }); 
 
    

@@ -31,11 +31,31 @@ $(document).ready(function(){
 	})
 
     function APIcall(){
-    	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + "&api_key=dc6zaTOxFJmzC";
+    	var topic = $(this).data('gif');
+    	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + 
+    		"&api_key=dc6zaTOxFJmzC&limit=10";
 
     	// get info from the link above
-    	$.ajax({url: queryURL, method: 'GET'}).done(function(response) {
-    	
+    	$.ajax({
+    		url: queryURL, 
+    		method: 'GET'
+    	})
+    	//response to return value of topic added
+    	.done(function(response) {
+    		var results = response.data;
+
+    		for (var i =0; i < results.length; i++){
+    			var gifs = $('<div class="item">')
+    			var rating = results[i].rating;
+    			var topic = $('<p>').text("Rating:" + rating);
+    			var gifImg = $('<img>');
+    			gifImg.attr('src', results[i].images.original_still);
+
+    			gifs.append(topic)
+    			gifs.append(gifImg)
+
+    			$('#gifDiv').prepend(gifs);
+    		}	
     	});		
 
 	}

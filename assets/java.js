@@ -17,7 +17,10 @@ $(document).ready(function(){
 	function GifBtn (){
 		$('#buttonDiv').empty()
 		for (var i = 0; i < topics.length; i++) {
-			$('#buttonDiv').append("<button>" + topics[i] + "</button>");
+			var button = $("<button>");
+			button.html(topics[i]);
+			button.data('gif', topics[i]);
+			$('#buttonDiv').append(button);
 		 	//calling APIcall fn to run on button click
 			$('button').on('click', APIcall)
     	};
@@ -31,6 +34,7 @@ $(document).ready(function(){
 	})
 
     function APIcall(){
+    	//do "this" on click: run APIcall
     	var topic = $(this).data('gif');
     	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + topic + 
     		"&api_key=dc6zaTOxFJmzC&limit=10";
@@ -45,7 +49,7 @@ $(document).ready(function(){
 	    		var rating = results[i].rating;
 	    		var topic = $('<p>').text("Rating:" + rating);	
 	    		var gifImg = $('<img>');
-	    		gifImg.attr('src', results[i].images.fixed_height.url);
+	    		gifImg.attr('src', results[i].images.original_still.url);
 
 	    		gifs.append(topic)
 	    		gifs.append(gifImg)

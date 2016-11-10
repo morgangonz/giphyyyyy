@@ -23,6 +23,7 @@ $(document).ready(function(){
 			$('#buttonDiv').append(button);
 		 	//calling APIcall fn to run on button click
 			$('button').on('click', APIcall)
+			//$('gif').on('click', animateGif)
     	};
 	}			
 	//search button input appear here: add to button div
@@ -40,7 +41,8 @@ $(document).ready(function(){
     		"&api_key=dc6zaTOxFJmzC&limit=10";
 
     	// get info from the link above
-    	$.ajax({ url: queryURL, method: 'GET'}).done(function(response) {
+    	$.ajax({ url: queryURL, method: 'GET'}).done(function(response) 
+    	{
 
     		var results = response.data;
 
@@ -55,10 +57,20 @@ $(document).ready(function(){
 	    		gifs.append(gifImg)
 
 	    		$('#gifDiv').prepend(gifs);
+    			
+    			function animateGif(){
+
+    				if(document.getElementById('#gifDiv').src == "results[i].images.fixed_height.url");
+    				{	document.getElementById('#gifDiv').src == "results[i].images.fixed_height.url";
+    				}
     					
+    			
+				}
+						
 
 			};
-		
+
+				
 		});	
 	}	
 //calling the fn outside of it 
